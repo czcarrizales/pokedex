@@ -6,7 +6,7 @@ function App() {
 
   return (
     <div className='app'>
-    <PokedexList />
+      <PokedexList />
     </div>
   )
 }
