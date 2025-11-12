@@ -3,31 +3,30 @@ import "./styles/login.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function Signup() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
 
-  const handleSignup = async () => {
-    if (!username || !password) {
-      setMessage("Please fill in both fields.");
-      return;
+    const handleSignup = async () => {
+        if (!username || !password) {
+            setMessage("Please fill in both fields.");
+            return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+        const response = await fetch("http://localhost:5000/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+        });
 
-      const data = await response.json();
-      setMessage(data.message || data.error);
-      setUsername("");
-      setPassword("");
+        const data = await response.json();
+        setMessage(data.message || data.error);
+        setUsername("");
+        setPassword("");
     } catch (err) {
-      setMessage("Error connecting to server");
-    }
-  };
+        setMessage("Error connecting to server");
+    }};
 
   return (
     <div className="container" style={{ textAlign: "center", backgroundImage: "url('/assets/Screenshot 2025-11-10 205252.png')"}}>
