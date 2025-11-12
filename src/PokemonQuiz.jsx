@@ -4,6 +4,7 @@ import './styles/PokemonQuiz.css'
 const randomizeAnswersArray = (array) => array.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(([,v]) => v)
 const pickRandomArrayElement = (array) => array[Math.floor(Math.random() * array.length)]
 const generateIncorrectAnswers = (array, n) => randomizeAnswersArray(array).slice(0, n)
+const capitalize = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s)
 
 let TYPE_POOL = null;
 let ABILITY_POOL = null;
@@ -44,7 +45,7 @@ function buildTypeQuestion(pokemon, context) {
     const options = randomizeAnswersArray([correct, ...incorrects])
     return {
         imageUrl: pokemon.sprites?.other?.["official-artwork"]?.front_default ?? "",
-        prompt: `Which of these is one of ${pokemon.name}'s types?`, options,
+        prompt: `Which of these is one of ${capitalize(pokemon.name)}'s types?`, options,
         correctIndex: options.indexOf(correct)
     }
 
