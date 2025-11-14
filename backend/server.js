@@ -100,9 +100,21 @@ app.post("/login", (req, res) => {
 app.get("/count", (req, res) => {
   const userId = req.query.userId;
 
-  db.get(
-    "SELECT COUNT(*) AS total FROM user_pokemon WHERE user_id = ?", [userId], (err, row) => {
+  db.get("SELECT COUNT(*) AS total FROM user_pokemon WHERE user_id = ?", [userId], (err, row) => {
       res.json({ total: row.total });
+    }
+  );
+});
+
+app.get("/recent", (req, res) => {
+  const userId = req.query.userId;
+
+  db.get("SELECT pokemon_id FROM user_pokemon WHERE user_id = ? ORDER BY created_at DESC LIMIT 1", [userId], (err, row) => {
+      if(!row) {
+        return res.json(null);
+      } else {
+        res.json(row.pokemon_id);
+      }
     }
   );
 });
