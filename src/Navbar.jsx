@@ -8,9 +8,9 @@ function Navbar({navbartoken}) {
      <>
         <div className='navbar-main'>
             <Link to="/pokedex">Pokedex</Link>
-            <Link to="">Game Corner</Link>
+            <Link to="/pokemon-quiz">Game Corner</Link>
             <Link to="/pokemon-selection">Mystery Pull</Link>
-            <p>Profile</p>
+            <Link to="/profile">Profile</Link>
             <button className='navbar-button'>
                 <Link to="/login">Login</Link>
             </button>
