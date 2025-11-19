@@ -132,4 +132,12 @@ app.get("/pokedex", (req, res) => {
   })
 })
 
+app.get("/pokemonselection", (req, res) => {
+
+  db.all("SELECT * FROM pokemon ORDER BY RANDOM() LIMIT 3", (err, rows) => {
+    if (err) return res.status(500).json({error: err.message});
+    res.json(rows)
+  })
+})
+
 app.listen(5000, () => console.log("Server running on port 5000"));
