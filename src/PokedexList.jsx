@@ -9,6 +9,7 @@ function PokedexList() {
     const [selectedPokemondId, setSelectedPokemonId] = useState(null)
     const [pokemonDetails, setPokemonDetails] = useState(null)
     const [pokemonSpecies, setPokemonSpecies] = useState(null)
+    const [pokedexIds, setPokedexIds] = useState([]);
 
     useEffect(() => {
         const userId = sessionStorage.getItem("userId");
@@ -17,9 +18,9 @@ function PokedexList() {
             .then(data => {
                 console.log(data)
                 setPokemon(data)
+                const ids = data.map(p => p.id)
+                setPokedexIds(ids)
             })
-
-        console.log(pokemon)
     }, [])
 
     useEffect(() => {
@@ -38,8 +39,8 @@ function PokedexList() {
 
     return (
         <>
-            <div className='pokedex-list-main'>
-                <div>
+            <div>
+                <div className='pokedex-list-main'>
                     {
                         pokemon.map((p) => {
                             return (
@@ -54,7 +55,7 @@ function PokedexList() {
                 </div>
                 {
                     selectedPokemondId && (
-                        <div className="pokemon-overlay">
+                        <div className="pokemon-overlay" onClick={() => setSelectedPokemonId(null)}>
                             <div
                                 className="pokemon-modal-shell"
                                 onClick={(e) => e.stopPropagation()}
@@ -62,7 +63,7 @@ function PokedexList() {
                                 
 
                                 {pokemonDetails && (
-                                    <PokemonDetails pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
+                                    <PokemonDetails pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} pokemon={pokemon} setSelectedPokemonId={setSelectedPokemonId} pokedexIds={pokedexIds}/>
                                 )}
                             </div>
                         </div>

@@ -2,20 +2,18 @@ import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import './PokemonDetails.css'
-function PokemonDetails({ pokemonDetails, pokemonSpecies }) {
+function PokemonDetails({ pokemonDetails, pokemonSpecies, pokemon, setSelectedPokemonId, pokedexIds }) {
     const p = pokemonDetails
     const ps = pokemonSpecies
 
-    const [pokedexIds, setPokedexIds] = useState([]);
+    const currentIndex = pokedexIds.indexOf(p.id);
 
-    // const currentIndex = pokedexIds.indexOf(currentId);
+    const prevId = currentIndex > 0 ? pokedexIds[currentIndex - 1] : null;
 
-    // const prevId = currentIndex > 0 ? pokedexIds[currentIndex - 1] : null;
-
-    // const nextId =
-    //     currentIndex !== -1 && currentIndex < pokedexIds.length - 1
-    //         ? pokedexIds[currentIndex + 1]
-    //         : null;
+    const nextId =
+        currentIndex !== -1 && currentIndex < pokedexIds.length - 1
+            ? pokedexIds[currentIndex + 1]
+            : null;
 
 
     // if (!pokemon || !species) return <p>Loading...</p>
@@ -28,16 +26,16 @@ function PokemonDetails({ pokemonDetails, pokemonSpecies }) {
     return (
         <div className='pokemon-details-container'>
             <div className='pokemon-details-top'>
-                <span className="material-symbols-outlined arrow-back">arrow_back</span>
+                <span className="material-symbols-outlined arrow-back" onClick={() => setSelectedPokemonId(null)}>arrow_back</span>
                 <p className='pokemon-details-name'>{p.name.toUpperCase()}</p>
                 <p className='pokemon-details-number subtitle-2'>#{p.id}</p>
             </div>
             <div className='pokemon-details-upper'>
-                {/* <span className="material-symbols-outlined chevron" onClick={() => prevId && navigate(`/pokemon-details/${prevId}`)}
-                    disabled={!prevId}>chevron_left</span> */}
+                <span className="material-symbols-outlined chevron" onClick={() => prevId && setSelectedPokemonId(prevId)}
+                    disabled={!prevId}>chevron_left</span>
                 <img className='pokemon-sprite' src={p.sprites.other["official-artwork"].front_default} alt="Bulbasaur" />
-                {/* <span className="material-symbols-outlined chevron" onClick={() => nextId && navigate(`/pokemon-details/${nextId}`)}
-                    disabled={!nextId}>chevron_right</span> */}
+                <span className="material-symbols-outlined chevron" onClick={() => nextId && setSelectedPokemonId(nextId)}
+                    disabled={!nextId}>chevron_right</span>
             </div>
             <div className='pokemon-details-lower'>
                 <div className='pokemon-details-lower-inner'>
