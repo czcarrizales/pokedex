@@ -1,11 +1,19 @@
+.pokedex-list-parent {
+    display: flex;
+    flex: 1;
+    height: 100%;
+}
+
 .pokedex-list-main {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
+    align-content: flex-start;
     justify-content: center;
     padding: 8px;
     border-radius: 8px;
     background-color: white;
+    flex: 1;
 }
 
 .pokemon-box {

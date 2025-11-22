@@ -43,7 +43,7 @@ function PokedexList() {
 
     return (
         <>
-            <div>
+            <div className='pokedex-list-parent'>
                 <div className='pokedex-list-main'>
                     {
                         pokemon.map((p) => {
