@@ -32,7 +32,7 @@ function Signup() {
     <div className="container" style={{ textAlign: "center", backgroundImage: "url('/assets/Screenshot 2025-11-10 205252.png')"}}>
         <div className="left">
             <img className="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png"/>
-            <h1>Register an account with us!</h1>
+            <h1>Ready for a new adventure?</h1>
             <br />
             <p>Join thousands of other trainers in Pokédex Online to collect and trade<br/>hundreds of Pokémon from the Kanto region and beyond!</p>
         </div>

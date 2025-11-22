@@ -1,16 +1,7 @@
 import "./styles/tracker.css";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 function Tracker() {
-
-    const navigate = useNavigate();
-
-    const handleLogout = async () => {
-        sessionStorage.removeItem("userName");
-        sessionStorage.removeItem("userId");
-        navigate("/login");
-    };
 
     const [total, setTotal] = useState(0);
     const [userName, setUserName] = useState("");
@@ -34,21 +25,30 @@ function Tracker() {
             .then(data => setRecent(data));
     })
 
+    let cry;
+    const playCry = () => {
+        if (!cry) {
+            cry = new Audio(`https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${recent}.ogg`);
+            cry.volume = 0.2;
+        }
+        cry.play();
+    }
+
     return (
         <div className="trackerContainer">
             <h1>Pokémon Tracker</h1>
-            <p>Welcome, {userName}!</p>
             <div className="trackerDivider">
                 <div className="trackerLeft">
                     <p>Recently Caught</p>
-                    <img className="logo" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${recent}.png`}/>
+                    <button className="trackerButton" onClick={playCry}>
+                        <img className="trackerImage" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${recent}.gif`}/>
+                    </button>
                 </div>
                 <div className="trackerRight">
                     <p>Total Pokémon Caught</p>
                     <p>{total} / 151</p>
                 </div>
             </div>
-            <button onClick={handleLogout}>Log Out</button>
         </div>
     );
 }
