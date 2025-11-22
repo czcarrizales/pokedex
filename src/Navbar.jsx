@@ -7,10 +7,10 @@ function Navbar({navbartoken}) {
     return (
      <>
         <div className='navbar-main'>
-            <Link to="/pokedex">Pokedex</Link>
-            <Link to="/pokemon-quiz">Game Corner</Link>
-            <Link to="/pokemon-selection">Mystery Pull</Link>
-            <Link to="/profile">Profile</Link>
+            <Link to="/pokedex" className='nav-link'>Pokedex</Link>
+            <Link to="/pokemon-quiz" className='nav-link'>Game Corner</Link>
+            <Link to="/pokemon-selection" className='nav-link'>Mystery Pull</Link>
+            <Link to="/profile" className='nav-link'>Profile</Link>
             <button className='navbar-button'>
                 <Link to="/login">Login</Link>
             </button>
