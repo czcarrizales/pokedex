@@ -1,8 +1,15 @@
 .navbar-main {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     padding: 20px;
     color: white;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
 }
 
 .navbar-button {
