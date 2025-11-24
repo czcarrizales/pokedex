@@ -370,3 +370,29 @@
 .pokemon-details-type--fairy {
   background-color: #d685ad;
 }
+
+
+/* exact matches to bar colors */
+.pokemon-stat-label--hp {
+  color: #e64949;      /* HP bar color */
+}
+
+.pokemon-stat-label--atk {
+  color: #d99559;      /* ATK bar color */
+}
+
+.pokemon-stat-label--def {
+  color: #d8c050;      /* DEF bar color */
+}
+
+.pokemon-stat-label--satk {
+  color: #7fa4e8;      /* SATK bar color */
+}
+
+.pokemon-stat-label--sdef {
+  color: #8cc57b;      /* SDEF bar color */
+}
+
+.pokemon-stat-label--spd {
+  color: #e06c96;      /* SPD bar color */
+}

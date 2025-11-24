@@ -83,12 +83,12 @@ function PokemonDetails({ pokemonDetails, pokemonSpecies, pokemon, setSelectedPo
                         <p className='subtitle-1'>Base Stats</p>
                         <div className='pokemon-details-stat'>
                             <div className='pokemon-details-stat-labels'>
-                                <p className='subtitle-3'>HP</p>
-                                <p className='subtitle-3'>ATK</p>
-                                <p className='subtitle-3'>DEF</p>
-                                <p className='subtitle-3'>SATK</p>
-                                <p className='subtitle-3'>SDEF</p>
-                                <p className='subtitle-3'>SPD</p>
+                                <p className='subtitle-3 pokemon-stat-label pokemon-stat-label--hp'>HP</p>
+                                <p className='subtitle-3 pokemon-stat-label pokemon-stat-label--atk'>ATK</p>
+                                <p className='subtitle-3 pokemon-stat-label pokemon-stat-label--def'>DEF</p>
+                                <p className='subtitle-3 pokemon-stat-label pokemon-stat-label--satk'>SATK</p>
+                                <p className='subtitle-3 pokemon-stat-label pokemon-stat-label--sdef'>SDEF</p>
+                                <p className='subtitle-3 pokemon-stat-label pokemon-stat-label--spd'>SPD</p>
                             </div>
                             <div className='pokemon-details-border'>
 
