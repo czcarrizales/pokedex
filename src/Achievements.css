@@ -40,3 +40,9 @@
 .achievement-title {
     font-size: 15px;
 }
+
+.no-achievements {
+   text-align: center;
+   color: white;
+   font-size: 17px;
+}

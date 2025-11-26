@@ -313,7 +313,7 @@ app.get("/achievements", (req, res) => {
        })
     }
 
-    if (pokemonIDs.includes(69) || pokemonIDs.includes(70) || pokemonIDs.include(71))
+    if (pokemonIDs.includes(69) || pokemonIDs.includes(70) || pokemonIDs.includes(71))
     {
        achievements.push({
        id: 3,

@@ -24,6 +24,29 @@ function Achievements ({userId}) {
 
    }
 
+   if (achievements.length == 0)
+   {
+      return (
+          <div
+             className = 'achievements-main'
+             style =
+             {{
+               backgroundImage: "url('/assets/Project3Selection.png')",
+               backgroundSize: "cover",
+               backgroundRepeat: "no-repeat",
+               backgroundPosition: "center",
+               width: "100%",
+               minHeight: "100vh"
+             }}
+          >
+          <div className = 'achievements-header'>
+              <h1> Achievements </h1>
+          </div>
+          <p className = 'no-achievements'> No Achievements unlocked yet </p>
+          </div>
+      )
+   }
+
    return (
        <div
        className = 'achievements-main'
