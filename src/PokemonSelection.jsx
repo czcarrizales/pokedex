@@ -1,78 +1,69 @@
-
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './PokemonSelection.css'
 
-function PokemonSelection() {
+function PokemonSelection({selectiontoken, handleUseToken}) {
 
-    var randomPokemon
-    const pokemonList =
-    [
-        { "number": "#1",  "name": "Bulbasaur",   "img": "https://img.pokemondb.net/sprites/black-white/normal/bulbasaur.png",   "type": "Grass / Poison" },
-        { "number": "#2",  "name": "Ivysaur",     "img": "https://img.pokemondb.net/sprites/black-white/normal/ivysaur.png",     "type": "Grass / Poison" },
-        { "number": "#3",  "name": "Venusaur",    "img": "https://img.pokemondb.net/sprites/black-white/normal/venusaur.png",    "type": "Grass / Poison" },
-        { "number": "#4",  "name": "Charmander",  "img": "https://img.pokemondb.net/sprites/black-white/normal/charmander.png",  "type": "Fire" },
-        { "number": "#5",  "name": "Charmeleon",  "img": "https://img.pokemondb.net/sprites/black-white/normal/charmeleon.png",  "type": "Fire" },
-        { "number": "#6",  "name": "Charizard",   "img": "https://img.pokemondb.net/sprites/black-white/normal/charizard.png",   "type": "Fire / Flying" },
-        { "number": "#7",  "name": "Squirtle",    "img": "https://img.pokemondb.net/sprites/black-white/normal/squirtle.png",    "type": "Water" },
-        { "number": "#8",  "name": "Wartortle",   "img": "https://img.pokemondb.net/sprites/black-white/normal/wartortle.png",   "type": "Water" },
-        { "number": "#9",  "name": "Blastoise",   "img": "https://img.pokemondb.net/sprites/black-white/normal/blastoise.png",   "type": "Water" }
-    ]
+async function fetchRandomPokemon(){
+    const res = await fetch("http://localhost:5000/pokemonselection")
+    const data = await res.json()
 
+    setTimeout(() =>
+    {setCurrentPokemon1({
+        name: data[0].name,
+        img:  `https://img.pokemondb.net/sprites/black-white/normal/${data[0].name}.png`
+    })}, 500)
 
+    setTimeout(() =>
+    {setCurrentPokemon2({
+        name: data[1].name,
+        img:  `https://img.pokemondb.net/sprites/black-white/normal/${data[1].name}.png`
+    })}, 500)
 
-function getRandomPokemon()
-{
-     randomPokemon = Math.floor(Math.random() * pokemonList.length)
-     return pokemonList[randomPokemon]
+    setTimeout(() =>
+    {setCurrentPokemon3({
+        name: data[2].name,
+        img:  `https://img.pokemondb.net/sprites/black-white/normal/${data[2].name}.png`
+    })}, 500)
+
+    setFlipped1(false)
+    setFlipped2(false)
+    setFlipped3(false)
 }
 
-const [flipped1, setFlipped1] = useState(false)
-const [currentPokemon1, setCurrentPokemon1] = useState(getRandomPokemon())
+
+useEffect(() => {
+    fetchRandomPokemon()
+}, [])
+
+const [flipped1, setFlipped1] = useState()
+const [currentPokemon1, setCurrentPokemon1] = useState()
 
 function startFlip1()
 {
    setFlipped1(!flipped1)
+   handleUseToken()
 }
 
-
-function nextPokemon1()
-{
-   setFlipped1(false)
-   setTimeout(() =>
-   {setCurrentPokemon1(getRandomPokemon())}, 500)
-
-}
-
-const [flipped2, setFlipped2] = useState(false)
-const [currentPokemon2, setCurrentPokemon2] = useState(getRandomPokemon())
+const [flipped2, setFlipped2] = useState()
+const [currentPokemon2, setCurrentPokemon2] = useState()
 
 function startFlip2()
 {
-   setFlipped2(!flipped2)
+    setFlipped2(!flipped2)
+    handleUseToken()
 }
 
-
-function nextPokemon2()
-{
-   setFlipped2(false)
-   setTimeout(() =>
-   {setCurrentPokemon2(getRandomPokemon())}, 500)
-}
-
-const [flipped3, setFlipped3] = useState(false)
-const [currentPokemon3, setCurrentPokemon3] = useState(getRandomPokemon())
+const [flipped3, setFlipped3] = useState()
+const [currentPokemon3, setCurrentPokemon3] = useState()
 
 function startFlip3()
 {
-   setFlipped3(!flipped3)
+    setFlipped3(!flipped3)
+    handleUseToken()
 }
 
-
-function nextPokemon3()
-{
-   setFlipped3(false)
-   setTimeout(() =>
-   {setCurrentPokemon3(getRandomPokemon())}, 500)
+if (!currentPokemon1) {
+    return <p> Loading pokemon </p>
 }
 
     return(
@@ -88,7 +79,7 @@ function nextPokemon3()
           }}
           >
           <div className = 'pokedex-selection-header'>
-              <button onClick = {function() {nextPokemon1(); nextPokemon2() ;nextPokemon3();}} className = "button"> Next Pokemon </button>
+              <button onClick = {fetchRandomPokemon} className = "button"> Next Pokemon </button>
           </div>
           <div className= "pokemon-selection-group">
               <div className={`pokemon-selection-box ${flipped1 ?  'flipped' : ''}`} onClick = {startFlip1} >

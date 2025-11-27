@@ -1,8 +1,15 @@
 .navbar-main {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     padding: 20px;
     color: white;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
 }
 
 .navbar-button {
@@ -10,8 +17,29 @@
     border-radius: 8px;
     border: none;
     font-weight: bold;
+    width: auto;
 }
 
 .navbar-button:hover {
     cursor: pointer;
 }
+
+.token{
+   position: absolute;
+   top: 10px;
+   right: 20px;
+   display: flex;
+   align-items: center;
+   color: white;
+   padding: 5px 10px;
+}
+
+.tokenimage{
+  width: 45px;
+  height: 45px;
+}
+
+.count {
+   font-size: 16px;
+}
+
