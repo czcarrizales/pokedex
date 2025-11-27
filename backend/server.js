@@ -44,7 +44,7 @@ db.run(`CREATE TABLE IF NOT EXISTS user_pokemon (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (user_id, pokemon_id),
   FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (pokemon_id) REFERENCES pokemon_species(id)
+  FOREIGN KEY (pokemon_id) REFERENCES pokemon(id)
   )`
 );
 
@@ -131,5 +131,24 @@ app.get("/pokedex", (req, res) => {
     res.json(rows)
   })
 })
+
+app.get("/graph", (req, res) => {
+  const userId = req.query.userId;
+
+  const sql = `SELECT DATE(created_at) AS date, COUNT(*) AS caught FROM user_pokemon
+    WHERE user_id = ?
+    AND created_at >= DATE('now', '-6 days')
+    GROUP BY DATE(created_at)
+    ORDER BY DATE(created_at);
+  `;
+
+  db.all(sql, [userId], (err, rows) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Database error" });
+    }
+    res.json(rows);
+  });
+});
 
 app.listen(5000, () => console.log("Server running on port 5000"));
