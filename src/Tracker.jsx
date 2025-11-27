@@ -6,6 +6,7 @@ function Tracker() {
     const [total, setTotal] = useState(0);
     const [userName, setUserName] = useState("");
     const [recent, setRecent] = useState(0);
+    const [pokemonName, setPokemonName] = useState("");
     
     useEffect(() => {
         setUserName(sessionStorage.getItem("userName"));
@@ -25,6 +26,12 @@ function Tracker() {
             .then(data => setRecent(data));
     })
 
+    useEffect(() => {
+        fetch(`https://pokeapi.co/api/v2/pokemon/${recent}`)
+            .then(res => res.json())
+            .then(data => setPokemonName(data.name))
+    })
+
     let cry;
     const playCry = () => {
         if (!cry) {
@@ -36,12 +43,12 @@ function Tracker() {
 
     return (
         <div className="trackerContainer">
-            <h1>Pokémon Tracker</h1>
+            <h1>Pokémon Collection</h1>
             <div className="trackerDivider">
                 <div className="trackerLeft">
                     <p>Recently Caught</p>
                     <button className="trackerButton" onClick={playCry}>
-                        <img className="trackerImage" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${recent}.gif`}/>
+                        <img className="trackerImage" src={`https://play.pokemonshowdown.com/sprites/ani/${pokemonName}.gif`}/>
                     </button>
                 </div>
                 <div className="trackerRight">
@@ -49,6 +56,7 @@ function Tracker() {
                     <p>{total} / 151</p>
                 </div>
             </div>
+            <p>Keep up the good work!</p>
         </div>
     );
 }

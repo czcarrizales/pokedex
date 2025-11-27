@@ -14,7 +14,7 @@ function Graph() {
 
     return (
         <div className="graphContainer">
-            <h2>Your Weekly Activity</h2>
+            <h1>Your Weekly Activity</h1>
             <AreaChart style={{ width: '100%', aspectRatio: 1.618, maxWidth: 600 }} responsive data={data}>
                 <Area type="monotone" dataKey="caught" stroke="#DC143C" fill="#DC143C" name="Pokémon Caught"/>
                 <XAxis dataKey="day"/>
