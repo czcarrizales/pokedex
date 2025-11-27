@@ -8,6 +8,7 @@ import Signup from "./Signup";
 import Profile from "./Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PokemonQuiz from './PokemonQuiz';
+import Graph from './Graph';
 
 function App() {
 
