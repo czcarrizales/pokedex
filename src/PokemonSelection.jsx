@@ -1,29 +1,43 @@
 import { useState, useEffect } from 'react'
 import './PokemonSelection.css'
 
-function PokemonSelection({selectiontoken, handleUseToken}) {
+function PokemonSelection({userId, handleUseToken}) {
 
 async function fetchRandomPokemon(){
-    const res = await fetch("http://localhost:5000/pokemonselection")
+    const res = await fetch(`http://localhost:5000/pokemonselection?userId=${userId}`)
     const data = await res.json()
+    if (!data || data.length === 0) {
+        return
+    }
 
-    setTimeout(() =>
-    {setCurrentPokemon1({
-        name: data[0].name,
-        img:  `https://img.pokemondb.net/sprites/black-white/normal/${data[0].name}.png`
-    })}, 500)
+    // safety checks in case there are fewer than 3 left
+  if (data[0]) {
+    setCurrentPokemon1({
+      id: data[0].id,
+      name: data[0].name,
+      img: `https://img.pokemondb.net/sprites/black-white/normal/${data[0].name}.png`,
+      types: data[0].types,
+    });
+  }
 
-    setTimeout(() =>
-    {setCurrentPokemon2({
-        name: data[1].name,
-        img:  `https://img.pokemondb.net/sprites/black-white/normal/${data[1].name}.png`
-    })}, 500)
+  if (data[1]) {
+    setCurrentPokemon2({
+      id: data[1].id,
+      name: data[1].name,
+      img: `https://img.pokemondb.net/sprites/black-white/normal/${data[1].name}.png`,
+      types: data[1].types,
+    });
+  }
 
-    setTimeout(() =>
-    {setCurrentPokemon3({
-        name: data[2].name,
-        img:  `https://img.pokemondb.net/sprites/black-white/normal/${data[2].name}.png`
-    })}, 500)
+  if (data[2]) {
+    setCurrentPokemon3({
+      id: data[2].id,
+      name: data[2].name,
+      img: `https://img.pokemondb.net/sprites/black-white/normal/${data[2].name}.png`,
+      types: data[2].types,
+    });
+  }
+  console.log(data[0])
 
     setFlipped1(false)
     setFlipped2(false)
@@ -33,7 +47,7 @@ async function fetchRandomPokemon(){
 
 useEffect(() => {
     fetchRandomPokemon()
-}, [])
+}, [userId])
 
 const [flipped1, setFlipped1] = useState()
 const [currentPokemon1, setCurrentPokemon1] = useState()
