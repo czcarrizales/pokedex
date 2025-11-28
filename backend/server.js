@@ -199,8 +199,23 @@ app.get("/pokedex", (req, res) => {
 
 app.get("/pokemonselection", (req, res) => {
 
-  db.all("SELECT * FROM pokemon ORDER BY RANDOM() LIMIT 3", (err, rows) => {
-    if (err) return res.status(500).json({ error: err.message });
+  const userId = req.query.userId;
+
+  if (!userId) {
+    return res.status(400).json({error: "userId is required"});
+  }
+
+  const sql = `SELECT id, name, types FROM pokemon WHERE id NOT IN (
+    SELECT pokemon_id
+    FROM user_pokemon
+    WHERE user_id = ?
+  )
+  ORDER BY RANDOM()
+  LIMIT 3;  
+  `
+
+  db.all(sql, [userId], (err, rows) => {
+    if (err) return res.status(500).json({error: err.message})
     res.json(rows)
   })
 })
