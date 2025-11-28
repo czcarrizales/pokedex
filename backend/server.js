@@ -294,6 +294,32 @@ app.post("/tokens/use", (req, res) => {
   );
 });
 
+app.post("/addpokemon", (req, res) => {
+  const { userId, pokemonId } = req.body;
+
+  if (!userId || !pokemonId) {
+    return res
+      .status(400)
+      .json({ error: "userId and pokemonId are required" });
+  }
+
+  db.run(
+    "INSERT OR IGNORE INTO user_pokemon (user_id, pokemon_id) VALUES (?, ?)",
+    [userId, pokemonId],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+
+      res.json({
+        success: true,
+        inserted: this.changes === 1
+      });
+    }
+  );
+});
+
+
 app.get("/achievements", (req, res) => {
 
   const userId = req.query.userId;
