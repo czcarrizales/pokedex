@@ -185,6 +185,7 @@
 .arrow-back,
 .chevron {
   cursor: pointer;
+  user-select: none;
 }
 
 /* Normal */
