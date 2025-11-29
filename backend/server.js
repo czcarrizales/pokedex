@@ -347,7 +347,7 @@ app.get("/achievements", (req, res) => {
         }
         else if (achievement.reqPokemon)
         {
-            for (let j = 0; j < achievement.reqPokemon.length; i++)
+            for (let j = 0; j < achievement.reqPokemon.length; j++)
             {
                 if (pokemonIDs.includes(achievement.reqPokemon[j]))
                 {
