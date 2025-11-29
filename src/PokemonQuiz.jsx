@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import './styles/PokemonQuiz.css'
 
-const randomizeAnswersArray = (array) => array.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(([,v]) => v)
+const randomizeAnswersArray = (array) => array.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(([, v]) => v)
 const pickRandomArrayElement = (array) => array[Math.floor(Math.random() * array.length)]
 const generateIncorrectAnswers = (array, n) => randomizeAnswersArray(array).slice(0, n)
 const capitalize = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s)
@@ -35,7 +35,7 @@ async function fetchRandomPokemon() {
     const id = Math.floor(Math.random() * MAX_POKEMON_ID + 1)
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
     if (response.ok) return response.json()
-        throw new Error("Failed to fetch a random Pokemon.")
+    throw new Error("Failed to fetch a random Pokemon.")
 }
 
 function buildTypeQuestion(pokemon, context) {
@@ -85,23 +85,42 @@ export function usePokemonQuizState() {
         buildRandomQuestion()
     }, [buildRandomQuestion])
 
-    return {question, buildRandomQuestion}
+    return { question, buildRandomQuestion }
 }
 
-function PokemonQuiz({onCorrectAnswer}) {
+function PokemonQuiz({ onCorrectAnswer }) {
 
-    const {question, buildRandomQuestion} = usePokemonQuizState()
+    const { question, buildRandomQuestion } = usePokemonQuizState()
+
+    const [selectedIndex, setSelectedIndex] = useState(null)
+    const [isAnswered, setIsAnswered] = useState(false)
+    const [isCorrect, setIsCorrect] = useState(false)
+    const timeoutRef = useRef(null)
+
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, []);
 
     if (!question) return null;
 
     function handleAnswerClick(index) {
-        const isCorrect = index === question.correctIndex;
-
-        if (isCorrect && typeof onCorrectAnswer === "function") {
+        if (isAnswered) return
+        const correct = index === question.correctIndex;
+        setSelectedIndex(index)
+        setIsAnswered(true)
+        setIsCorrect(correct)
+        if (correct && typeof onCorrectAnswer === "function") {
             onCorrectAnswer()
         }
 
-        buildRandomQuestion()
+        timeoutRef.current = setTimeout(() => {
+            setSelectedIndex(null);
+            setIsAnswered(false);
+            setIsCorrect(false);
+            buildRandomQuestion();
+        }, 2000);
     }
 
     return (
@@ -110,11 +129,25 @@ function PokemonQuiz({onCorrectAnswer}) {
             <img className='quiz-image' src={question.imageUrl} alt="" />
             <div className='quiz-options'>
                 {question.options.map((answerText, index) => {
+                    let extraClass = "";
+
+                    if (isAnswered) {
+                        if (index === question.correctIndex) {
+                            extraClass = " quiz-option--correct";
+                        } else if (index === selectedIndex) {
+                            extraClass = " quiz-option--wrong";
+                        }
+                    }
                     return (
-                        <button onClick={() => handleAnswerClick(index)} className='quiz-option'>{answerText}</button>
+                        <button onClick={() => handleAnswerClick(index)} className={`quiz-option${extraClass}`} disabled={isAnswered}>{answerText}</button>
                     )
                 })}
             </div>
+            {isAnswered && (
+                <p className={`quiz-feedback ${isCorrect ? "quiz-feedback--correct" : "quiz-feedback--wrong"}`}>
+                    {isCorrect ? "✅ Correct! +1 token" : "❌ Incorrect. No token this time."}
+                </p>
+            )}
         </div>
     )
 }
