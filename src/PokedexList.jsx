@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import './PokedexList.css'
 import PokemonDetails from './PokemonDetails'
+import PokemonModel from './models/PokemonModel'
 
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -20,9 +20,9 @@ function PokedexList() {
         fetch(`http://localhost:5000/pokedex?userId=${userId}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                setPokemon(data)
-                const ids = data.map(p => p.id)
+                const models = data.map((row) => new PokemonModel(row))
+                setPokemon(models)
+                const ids = models.map(p => p.id)
                 setPokedexIds(ids)
             })
     }, [])
@@ -61,13 +61,13 @@ function PokedexList() {
                     {
                         pokemon.map((p) => {
                             return (
-                                <button key={p.id} className={`pokemon-box type-${p.types[0]}`} onClick={() => setSelectedPokemonId(p.id)}>
+                                <button key={p.id} className={`pokemon-box type-${p.primaryType}`} onClick={() => setSelectedPokemonId(p.id)}>
                                     <p className='pokemon-number'>{p.id}</p>
                                     <div className='pokemon-sprite-wrapper'>
-                                        <img id='pokedex-sprite' src={`https://play.pokemonshowdown.com/sprites/ani/${p.name}.gif`} />
+                                        <img id='pokedex-sprite' src={p.animatedSpriteUrl} />
                                     </div>
 
-                                    <p className='pokemon-name'>{capitalize(p.name)}</p>
+                                    <p className='pokemon-name'>{capitalize(p.displayName)}</p>
                                 </button>
                             )
                         })

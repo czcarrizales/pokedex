@@ -18,7 +18,7 @@
 
 .pokemon-box {
   display: grid;
-  grid-template-rows: 24px 1fr 32px;
+  grid-template-rows: 24px 1fr 36px;
   width: 200px;
   height: 200px;
   padding: 8px;
@@ -30,14 +30,28 @@
 
   background: var(--card-bg);
   border: 2px solid var(--card-border);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border-radius: 14px;
+}
+
+.pokemon-box:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
 }
 
 .pokemon-number {
-  color: #666666;
-  font-size: 16px;
   justify-self: end;
-  align-self: center;
+  align-self: start;
+  margin-top: 4px;
+  margin-right: 4px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #888;
+  padding: 0;
+  background: none
 }
 
 
@@ -59,14 +73,11 @@
 
 .pokemon-name {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   text-align: center;
   align-self: center;
-}
-
-
-.pokemon-box:hover {
-  cursor: pointer;
+  color: #333;
+  letter-spacing: 0;
 }
 
 .pokemon-overlay {
