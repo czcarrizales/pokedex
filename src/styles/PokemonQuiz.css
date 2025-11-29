@@ -4,11 +4,16 @@
     align-items: center;
     background-color: white;
     padding: 16px;
+    flex: 1 1 auto;
 }
 
 .quiz-question {
     font-size: 32px;
     font-weight: bold;
+}
+
+.quiz-image {
+    max-width: 440px;
 }
 
 .quiz-options {
@@ -25,9 +30,32 @@
     font-weight: 600;
     background-color: white;
     border-radius: 8px;
+    transition: background-color 0.15s ease, transform 0.15s ease;
 }
 
 .quiz-option:hover {
     cursor: pointer;
     transform: scale(1.05);
+}
+
+.quiz-option--correct {
+  background-color: #2ecc71;
+  transform: scale(1.03);
+}
+
+.quiz-option--wrong {
+  background-color: #e74c3c;
+}
+
+.quiz-feedback {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.quiz-feedback--correct {
+  color: #2ecc71;
+}
+
+.quiz-feedback--wrong {
+  color: #e74c3c;
 }
