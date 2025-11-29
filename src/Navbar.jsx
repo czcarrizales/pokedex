@@ -15,11 +15,12 @@ function Navbar({ navbartoken, handleLogout }) {
                 <button className='navbar-button' onClick={handleLogout}>
                     Logout
                 </button>
+                <div className='token'>
+                    <span className='count'> x{navbartoken} </span>
+                    <img src="assets/Project3Token.png" alt="token" className='tokenimage' />
+                </div>
             </div>
-            <div className='token'>
-                <span className='count'> x{navbartoken} </span>
-                <img src="assets/Project3Token.png" alt="token" className='tokenimage' />
-            </div>
+
         </>
     )
 }
