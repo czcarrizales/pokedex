@@ -7,7 +7,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Profile from "./Profile";
 import Navbar from "./Navbar";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import PokemonQuiz from './PokemonQuiz';
 import ProtectedRoute from './ProtectedRoute'
 import Achievements from './Achievements'

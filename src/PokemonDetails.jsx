@@ -1,21 +1,11 @@
-import React from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import './PokemonDetails.css'
+import PokemonDetailsModel from './models/PokemonDetailsModel'
 function PokemonDetails({ pokemonDetails, pokemonSpecies, pokemon, setSelectedPokemonId, pokedexIds }) {
-    const p = pokemonDetails
-    const ps = pokemonSpecies
-    const heightMeters = pokemonDetails.height / 10;      // dm → m
-    const weightKg = pokemonDetails.weight / 10;          // hg → kg
-    const STAT_COLORS = {
-        hp: "#e64949",
-        attack: "#d99559",
-        defense: "#d8c050",
-        "special-attack": "#7fa4e8",
-        "special-defense": "#8cc57b",
-        speed: "#e06c96",
-    };
-    const currentIndex = pokedexIds.indexOf(p.id);
+    if (!pokemonDetails || !pokemonSpecies) return null
+
+    const model = new PokemonDetailsModel(pokemonDetails, pokemonSpecies)
+
+    const currentIndex = pokedexIds.indexOf(model.id);
 
     const prevId = currentIndex > 0 ? pokedexIds[currentIndex - 1] : null;
 
@@ -24,25 +14,17 @@ function PokemonDetails({ pokemonDetails, pokemonSpecies, pokemon, setSelectedPo
             ? pokedexIds[currentIndex + 1]
             : null;
 
-
-    // if (!pokemon || !species) return <p>Loading...</p>
-
-    const entry = ps.flavor_text_entries.find(
-        (e) => e.language.name === "en"
-    );
-    const description = entry ? entry.flavor_text.replace(/\s+/g, " ") : "";
-
     return (
-        <div className={`pokemon-details-container pokemon-details-container--${p.types[0].type.name}`}>
+        <div className={`pokemon-details-container ${model.containerClass}`}>
             <div className='pokemon-details-top'>
                 <span className="material-symbols-outlined arrow-back" onClick={() => setSelectedPokemonId(null)}>arrow_back</span>
-                <p className='pokemon-details-name'>{p.name.toUpperCase()}</p>
-                <p className='pokemon-details-number subtitle-2'>#{p.id}</p>
+                <p className='pokemon-details-name'>{model.displayName}</p>
+                <p className='pokemon-details-number subtitle-2'>#{model.id}</p>
             </div>
             <div className='pokemon-details-upper'>
                 <span className="material-symbols-outlined chevron" onClick={() => prevId && setSelectedPokemonId(prevId)}
                     disabled={!prevId}>chevron_left</span>
-                <img className='pokemon-sprite' src={p.sprites.other["official-artwork"].front_default} alt="Bulbasaur" />
+                <img className='pokemon-sprite' src={model.artworkUrl} alt={model.displayName} />
                 <span className="material-symbols-outlined chevron" onClick={() => nextId && setSelectedPokemonId(nextId)}
                     disabled={!nextId}>chevron_right</span>
             </div>
@@ -50,8 +32,8 @@ function PokemonDetails({ pokemonDetails, pokemonSpecies, pokemon, setSelectedPo
                 <div className='pokemon-details-lower-inner'>
                     <div className='pokemon-details-types'>
                         {
-                            p.types.map(t => (
-                                <p className={`pokemon-details-type pokemon-details-type--${t.type.name}`}>{t.type.name.toUpperCase()}</p>
+                            model.types.map((typeName) => (
+                                <p className={`pokemon-details-type pokemon-details-type--${typeName}`}>{typeName.toUpperCase()}</p>
                             ))
                         }
                     </div>
@@ -62,7 +44,7 @@ function PokemonDetails({ pokemonDetails, pokemonSpecies, pokemon, setSelectedPo
                         <div className='pokemon-details-info'>
                             <div className='pokemon-details-values'>
                                 <span className="material-symbols-outlined">weight</span>
-                                <p>{weightKg}kg</p>
+                                <p>{model.weightKg}kg</p>
                             </div>
 
                             <p className='caption'>Weight</p>
@@ -71,13 +53,13 @@ function PokemonDetails({ pokemonDetails, pokemonSpecies, pokemon, setSelectedPo
                         <div className='pokemon-details-info' >
                             <div className='pokemon-details-values'>
                                 <span className="material-symbols-outlined">height</span>
-                                <p>{heightMeters}m</p>
+                                <p>{model.heightMeters}m</p>
                             </div>
                             <p className='caption'>Height</p>
                         </div>
                     </div>
                     <div className='pokemon-details-description'>
-                        {description}
+                        {model.description}
                     </div>
                     <div className='pokemon-details-all-stats'>
                         <p className='subtitle-1'>Base Stats</p>
@@ -94,13 +76,13 @@ function PokemonDetails({ pokemonDetails, pokemonSpecies, pokemon, setSelectedPo
 
                             </div>
                             <div>
-                                {p.stats.map((s) => (
-                                    <div className='pokemon-details-stat-right' key={s.stat.name}>
+                                {model.stats.map((s) => (
+                                    <div className='pokemon-details-stat-right' key={s.name}>
                                         <p className='pokemon-details-stat-value'>
-                                            {s.base_stat}
+                                            {s.value}
                                         </p>
                                         <div className='pokemon-details-stat-line-wrapper'>
-                                            <div className='pokemon-details-stat-line' style={{ width: `${Math.round((s.base_stat / 255) * 100)}%`, backgroundColor: STAT_COLORS[s.stat.name] || "#B8B8B8" }}></div>
+                                            <div className='pokemon-details-stat-line' style={{ width: `${s.percent}%`, backgroundColor: s.color }}></div>
                                         </div>
 
                                     </div>
