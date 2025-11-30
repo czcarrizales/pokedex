@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "name": "LIVING ON A PRAYER",
+    "description": "You got a 100 pokemon.",
+    "img": "/assets/png",
+    "count": 100
+  },
+  {
+    "id": 2,
+    "name": "IT'S A RAT",
+    "description": "You caught Rattata or Raticate",
+    "img": "/assets/img.png",
+    "reqPokemon": [19, 20]
+  },
+  {
+    "id": 3,
+    "name": "PLANTS VS ZOMBIES",
+    "description": "You caught Bellsprout, Weepinbell, or Victreebel",
+    "img": "/assets/png",
+    "reqPokemon": [69, 70, 71]
+  },
+  {
+    "id": 4,
+    "name": "GOT A POKEBALL",
+    "description": "You caught Voltorb",
+    "img": "/assets/png",
+    "reqPokemon": [100, 101]
+  },
+  {
+    "id": 5,
+    "name": "OH LAWD HE COMIN",
+    "description": "You caught Snorlax",
+    "img": "/assets/png",
+    "reqPokemon": [143]
+  },
+  {
+    "id": 6,
+    "name": "CAN'T TOUCH THIS",
+    "description": "You caught Kadabra or Alakazam",
+    "img": "/assets/png",
+    "reqPokemon": [64, 65]
+  },
+  {
+    "id": 7,
+    "name": "FUS DO RAH",
+    "description": "You caught Dragonite",
+    "img": "/assets/png",
+    "reqPokemon": [149]
+  },
+  {
+    "id": 8,
+    "name": "YOU SHALL NOT PASS",
+    "description": "You caught a pokemon with 120+ Defense",
+    "img": "/assets/png",
+    "reqPokemon": [76, 91, 95, 110]
+  },
+  {
+    "id": 9,
+    "name": "MAX PRESTIGE",
+    "description": "You caught a pokemon with 150+ Health",
+    "img": "/assets/png",
+    "reqPokemon": [113, 143]
+  },
+  {
+    "id": 10,
+    "name": "ONIONS HAVE LAYERS",
+    "description": "You caught Eevee or one of it's evolutions",
+    "img": "/assets/png",
+    "reqPokemon": [133, 134, 135, 136, 196, 197]
+  },
+  {
+    "id": 11,
+    "name": "HE ANGY",
+    "description": "You caught Mankey or Primeape",
+    "img": "/assets/png",
+    "reqPokemon": [56, 57]
+  },
+  {
+    "id": 12,
+    "name": "A NEW HOPE",
+    "description": "You caught your first pokemon",
+    "img": "/assets/png",
+    "count": 1
+  }
+]
