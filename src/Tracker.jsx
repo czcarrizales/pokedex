@@ -1,5 +1,6 @@
 import "./styles/tracker.css";
 import { useEffect, useState } from "react";
+import { PieChart, Pie, RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
 
 function Tracker() {
 
@@ -53,7 +54,23 @@ function Tracker() {
                 </div>
                 <div className="trackerRight">
                     <p><b>Total Pokémon Caught</b></p>
-                    <p>{total} / 151</p>
+                    <div className="pieContainer">
+                        <PieChart
+                        width={125}
+                        height={125}
+                        data={[{ name: "Caught", value: total, fill: "#4caf50" }, { name: "Max", value: 200 - total, fill: "white" }]}
+                        >
+                            <Pie
+                                background={{ fill: "white" }}
+                                dataKey="value"
+                                innerRadius="70%"
+                                outerRadius="100%"
+                                startAngle={90}
+                                endAngle={-270}
+                            />
+                        </PieChart>
+                        <p className="pieText">{total} / 200</p>
+                    </div>
                 </div>
             </div>
             <p>Keep up the good work, {userName}!</p>

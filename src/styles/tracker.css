@@ -16,6 +16,7 @@
 .trackerDivider {
     display: flex;
     justify-content: space-evenly;
+    align-items: flex-start;
     width: 100%;
 }
 
@@ -46,4 +47,20 @@
 
 .trackerButton:hover {
     background-color: transparent;
+}
+
+.pieContainer {
+    width: 125px;
+    height: 125px;
+    position: relative;
+}
+
+.pieText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
 }
