@@ -23,6 +23,7 @@ function ChangeUsername({ userId }) {
 
   if (res.ok) {
     sessionStorage.setItem("userName", username);
+    document.getElementById("input").value = "";
     alert("Username updated!");
   } else {
     alert("Error: " + data.error);
@@ -31,7 +32,7 @@ function ChangeUsername({ userId }) {
 
   return (
     <div className="changeContainer">
-      <input className="changeInput" type="text" placeholder="Enter new username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+      <input id="input" className="changeInput" type="text" placeholder="Enter new username" value={username} onChange={(e) => setUsername(e.target.value)}/>
       <button className="changeButton" onClick={handleUpdate}>Change Username</button>
     </div>
   );
