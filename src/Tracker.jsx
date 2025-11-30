@@ -56,7 +56,7 @@ function Tracker() {
                     <p>{total} / 151</p>
                 </div>
             </div>
-            <p>Keep up the good work!</p>
+            <p>Keep up the good work, {userName}!</p>
         </div>
     );
 }
