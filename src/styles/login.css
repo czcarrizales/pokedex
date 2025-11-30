@@ -93,7 +93,7 @@ h2 {
     background-color: #A10F2C;
 }
 
-input {
+.loginInput {
     font-size: 20px;
     width: 50%;
     box-sizing: border-box;

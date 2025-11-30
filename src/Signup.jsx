@@ -33,7 +33,7 @@ function Signup() {
     <div className="container" style={{ textAlign: "center"}}>
         <div className="left left-signup">
             <img className="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png"/>
-            <h1>Register an account with us!</h1>
+            <h1>Ready for a new adventure?</h1>
             <br />
             <p>Join thousands of other trainers in Pokédex Online to collect and trade<br/>hundreds of Pokémon from the Kanto region and beyond!</p>
         </div>
@@ -41,6 +41,7 @@ function Signup() {
             <h3 style={{fontSize: "50px", margin: 0}}>Pokédex Online</h3>
             <h2>Create an account</h2>
             <input
+                className="loginInput"
                 type="text"
                 placeholder="Enter username"
                 value={username}
@@ -48,6 +49,7 @@ function Signup() {
             />
             <br />
             <input
+                className="loginInput"
                 type="password"
                 placeholder="Enter password"
                 value={password}

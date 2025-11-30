@@ -52,6 +52,7 @@ function Login() {
                 <h3 style={{fontSize: "50px", margin: 0}}>Pokédex Online</h3>
                 <h2>Log in to your account</h2>
                 <input
+                    className="loginInput"
                     type="text"
                     placeholder="Enter username"
                     value={username}
@@ -60,6 +61,7 @@ function Login() {
                 />
                 <br />
                 <input
+                    className="loginInput"
                     type="password"
                     placeholder="Enter password"
                     value={password}

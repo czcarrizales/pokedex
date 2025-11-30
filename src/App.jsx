@@ -9,6 +9,7 @@ import Profile from "./Profile";
 import Navbar from "./Navbar";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import PokemonQuiz from './PokemonQuiz';
+import Graph from './Graph';
 import ProtectedRoute from './ProtectedRoute'
 import Achievements from './Achievements'
 

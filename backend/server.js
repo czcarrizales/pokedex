@@ -221,6 +221,25 @@ app.get("/pokemonselection", (req, res) => {
   })
 })
 
+app.get("/graph", (req, res) => {
+  const userId = req.query.userId;
+
+  const sql = `SELECT DATE(created_at) AS date, COUNT(*) AS caught FROM user_pokemon
+    WHERE user_id = ?
+    AND created_at >= DATE('now', '-6 days')
+    GROUP BY DATE(created_at)
+    ORDER BY DATE(created_at);
+  `;
+
+  db.all(sql, [userId], (err, rows) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Database error" });
+    }
+    res.json(rows);
+  });
+});
+
 app.get("/tokens", (req, res) => {
   const userId = req.query.userId;
 
@@ -361,5 +380,33 @@ app.get("/achievements", (req, res) => {
 
   })
 })
+
+app.put("/update-username", (req, res) => {
+  const { id, username } = req.body;
+
+  if (!id) {
+    return res.status(400).json({ error: "User ID is required" });
+  }
+
+  if (!username) {
+    return res.status(400).json({ error: "Username is required" });
+  }
+
+  const sql = "UPDATE users SET username = ? WHERE id = ?";
+  const params = [username, id];
+
+  db.run(sql, params, function (err) {
+    if (err) {
+      console.error(err.message);
+      return res.status(500).json({ error: "Failed to update username" });
+    }
+
+    if (this.changes === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ message: "Username updated successfully" });
+  });
+});
 
 app.listen(5000, () => console.log("Server running on port 5000"));

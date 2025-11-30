@@ -1,0 +1,38 @@
+.homeContainer {
+    width: 60%;
+    height: 300px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.homeButton {
+    width: 250px;
+    height: 50px;
+    line-height: 0;
+    padding: 30px;
+    color: white;
+    background-color: #DC143C;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 150ms ease;
+    font-size: 20px;
+}
+
+.homeButton:hover {
+    background-color: #A10F2C;
+}
+
+.homeGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 10px;
+    justify-content: center;
+}
