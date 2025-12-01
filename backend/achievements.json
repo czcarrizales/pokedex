@@ -23,7 +23,7 @@
   {
     "id": 4,
     "name": "GOT A POKEBALL",
-    "description": "You caught Voltorb",
+    "description": "You caught Voltorb or Electrode",
     "img": "/achievements/ACHIEVE4.png",
     "reqPokemon": [100, 101]
   },
