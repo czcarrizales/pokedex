@@ -60,8 +60,11 @@ function PokemonSelection({ token, userId, handleUseToken }) {
     const [currentPokemon1, setCurrentPokemon1] = useState()
 
     function startFlip1() {
+        if (flipped1) {
+            return
+        }
         if (token <= 0) {
-            console.warn("No tokens left, cannot select a Pokémon.");
+            alert("No tokens left, cannot select a Pokémon!");
             return;
         }
         setFlipped1(!flipped1)
@@ -73,8 +76,11 @@ function PokemonSelection({ token, userId, handleUseToken }) {
     const [currentPokemon2, setCurrentPokemon2] = useState()
 
     function startFlip2() {
+        if (flipped2) {
+            return
+        }
         if (token <= 0) {
-            console.warn("No tokens left, cannot select a Pokémon.");
+            alert("No tokens left, cannot select a Pokémon!");
             return;
         }
         setFlipped2(!flipped2)
@@ -86,8 +92,11 @@ function PokemonSelection({ token, userId, handleUseToken }) {
     const [currentPokemon3, setCurrentPokemon3] = useState()
 
     function startFlip3() {
+        if (flipped3) {
+            return
+        }
         if (token <= 0) {
-            console.warn("No tokens left, cannot select a Pokémon.");
+            alert("No tokens left, cannot select a Pokémon!");
             return;
         }
         setFlipped3(!flipped3)
