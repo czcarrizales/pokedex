@@ -115,11 +115,25 @@ function PokemonSelection({ token, userId, handleUseToken }) {
             }
 
             const data = await res.json();
+            const pokemon =
+                [currentPokemon1, currentPokemon2, currentPokemon3].find(
+                    (p) => p && p.id === pokemonId
+                );
+
+            const name = pokemon?.name || "Pokémon";
+            showToast(`${name.charAt(0).toUpperCase() + name.slice(1)} was added to your Pokédex!`);
             console.log("Add pokemon result:", data);
         } catch (err) {
             console.error("Error adding Pokémon:", err);
         }
     }
+
+    const [toastMessage, setToastMessage] = useState(null);
+
+    const showToast = (message) => {
+        setToastMessage(message);
+        setTimeout(() => setToastMessage(null), 2500);
+    };
 
 
     if (!currentPokemon1) {
@@ -182,6 +196,11 @@ function PokemonSelection({ token, userId, handleUseToken }) {
                     </div>
                 </div>
             </div>
+            {toastMessage && (
+                <div className="toast">
+                    {toastMessage}
+                </div>
+            )}
         </>
     )
 }
