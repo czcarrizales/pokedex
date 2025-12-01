@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react'
 import './PokemonSelection.css'
+import { useMusic } from "./MusicProvider";
 
 function PokemonSelection({ token, userId, handleUseToken }) {
+
+    const { setTrack } = useMusic();
+
+    useEffect(() => {
+        setTrack("mystery");
+    }, [setTrack]);
 
     async function fetchRandomPokemon() {
         const res = await fetch(`http://localhost:5000/pokemonselection?userId=${userId}`)

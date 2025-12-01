@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/login.css";
+import { useMusic } from "./MusicProvider";
 
 function Login() {
+
+    const { setTrack } = useMusic();
+
+    useEffect(() => {
+        setTrack("auth");
+    }, [setTrack]);
 
     const navigate = useNavigate();
 
@@ -15,26 +22,26 @@ function Login() {
         if (!username || !password) {
             setMessage("Please fill in both fields.");
             return;
-    }
-
-    try {
-        const response = await fetch("http://localhost:5000/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            setUsername("");
-            setPassword("");
-            sessionStorage.setItem("userName", data.user.username);
-            sessionStorage.setItem("userId", data.user.id);
-            navigate("/profile");
-        } else {
-            setMessage(data.message || "Invalid username or password");
         }
+
+        try {
+            const response = await fetch("http://localhost:5000/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setUsername("");
+                setPassword("");
+                sessionStorage.setItem("userName", data.user.username);
+                sessionStorage.setItem("userId", data.user.id);
+                navigate("/profile");
+            } else {
+                setMessage(data.message || "Invalid username or password");
+            }
         } catch (err) {
             setMessage("Error connecting to server");
         }
@@ -43,13 +50,13 @@ function Login() {
     return (
         <div className="container" style={{ textAlign: "center" }}>
             <div className="left left-login">
-                <img className="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png"/>
+                <img className="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png" />
                 <h1>Welcome back, Trainer!</h1>
                 <br />
-                <p>Log in to access your personal dashboard in Pokédex Online<br/>and continue your Pokémon journey!</p>
+                <p>Log in to access your personal dashboard in Pokédex Online<br />and continue your Pokémon journey!</p>
             </div>
             <form onSubmit={handleLogin} className="right">
-                <h3 style={{fontSize: "50px", margin: 0}}>Pokédex Online</h3>
+                <h3 style={{ fontSize: "50px", margin: 0 }}>Pokédex Online</h3>
                 <h2>Log in to your account</h2>
                 <input
                     className="loginInput"
@@ -71,7 +78,7 @@ function Login() {
                 <br />
                 <button className="login-button" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e0e0e0">
-                        <path d="M480-144v-72h264v-528H480v-72h264q29.7 0 50.85 21.15Q816-773.7 816-744v528q0 29.7-21.15 50.85Q773.7-144 744-144H480Zm-72-168-51-51 81-81H144v-72h294l-81-81 51-51 168 168-168 168Z"/>
+                        <path d="M480-144v-72h264v-528H480v-72h264q29.7 0 50.85 21.15Q816-773.7 816-744v528q0 29.7-21.15 50.85Q773.7-144 744-144H480Zm-72-168-51-51 81-81H144v-72h294l-81-81 51-51 168 168-168 168Z" />
                     </svg>
                     Log In
                 </button>

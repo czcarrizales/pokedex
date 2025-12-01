@@ -4,6 +4,7 @@ import SetHometown from "./SetHometown";
 import ChangeUsername from "./ChangeUsername";
 import "./styles/profile.css";
 import { useEffect, useState } from "react";
+import { useMusic } from "./MusicProvider";
 
 function Profile() {
 
@@ -12,6 +13,12 @@ function Profile() {
     useEffect(() => {
         setUserName(sessionStorage.getItem("userName"));
     }, []);
+
+    const { setTrack } = useMusic();
+
+    useEffect(() => {
+        setTrack("profile");
+    }, [setTrack]);
 
 // Old button
 /*

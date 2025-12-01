@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import "./styles/login.css";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useMusic } from "./MusicProvider";
 
 function Signup() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+
+    const { setTrack } = useMusic();
+    
+        useEffect(() => {
+            setTrack("auth");
+        }, [setTrack]);
 
     const handleSignup = async (e) => {
         e.preventDefault()

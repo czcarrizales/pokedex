@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useMusic } from "./MusicProvider";
 import './styles/PokemonQuiz.css'
 
 const randomizeAnswersArray = (array) => array.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(([, v]) => v)
@@ -102,6 +103,12 @@ function PokemonQuiz({ onCorrectAnswer }) {
             if (timeoutRef.current) clearTimeout(timeoutRef.current);
         };
     }, []);
+
+    const { setTrack } = useMusic();
+    
+        useEffect(() => {
+            setTrack("quiz");
+        }, [setTrack]);
 
     if (!question) return null;
 

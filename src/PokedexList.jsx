@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './PokedexList.css'
 import PokemonDetails from './PokemonDetails'
 import PokemonModel from './models/PokemonModel'
+import { useMusic } from "./MusicProvider";
 
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -14,6 +15,12 @@ function PokedexList() {
     const [pokemonDetails, setPokemonDetails] = useState(null)
     const [pokemonSpecies, setPokemonSpecies] = useState(null)
     const [pokedexIds, setPokedexIds] = useState([]);
+
+    const { setTrack } = useMusic();
+
+    useEffect(() => {
+        setTrack("pokedex");
+    }, [setTrack]);
 
     useEffect(() => {
         const userId = sessionStorage.getItem("userId");
@@ -41,13 +48,13 @@ function PokedexList() {
                 setPokemonDetails(detailsJson);
                 setPokemonSpecies(speciesJson);
 
-                // new Audio(
-                //     `https://play.pokemonshowdown.com/audio/cries/${detailsJson.name.toLowerCase()}.ogg`
-                // )
-                //     .play()
-                //     .catch(() => {
+                new Audio(
+                    `https://play.pokemonshowdown.com/audio/cries/${detailsJson.name.toLowerCase()}.ogg`
+                )
+                    .play()
+                    .catch(() => {
 
-                //     });
+                    });
             })
             .catch(err => {
                 console.error("Error loading Pokémon:", err);
