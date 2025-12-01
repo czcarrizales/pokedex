@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
+import MusicToggle from './MusicToggle'
 
 function Navbar({ navbartoken, handleLogout }) {
 
@@ -13,6 +14,7 @@ function Navbar({ navbartoken, handleLogout }) {
                 <Link to="/pokemon-selection" className='nav-link'>Mystery Pull</Link>
                 <Link to="/profile" className='nav-link'>Profile</Link>
                 <Link to="/achievements" className='nav-link'> Achievements </Link>
+                <MusicToggle />
                 <button className='navbar-button' onClick={handleLogout}>
                     Logout
                 </button>
