@@ -139,8 +139,9 @@ function PokemonSelection({ token, userId, handleUseToken }) {
                 }}
             >
                 <div className='pokedex-selection-header'>
-                    <button onClick={fetchRandomPokemon} className="button"> Next Pokemon </button>
+                    <button onClick={fetchRandomPokemon} className="button"> Reroll Pokemon </button>
                 </div>
+                <p className='pokemon-selection-text'>Pick to reveal your Pokemon and add them to your Pokedex! (costs 1 token)</p>
                 <div className="pokemon-selection-group">
                     <div className={`pokemon-selection-box ${flipped1 ? 'flipped' : ''}`} onClick={startFlip1} >
                         <div className='inner'>

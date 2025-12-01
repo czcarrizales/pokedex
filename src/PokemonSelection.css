@@ -78,6 +78,20 @@
   transform: rotateY(180deg);
 }
 
+.pokemon-selection-box::after {
+  content: "";
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.35), transparent);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
 .front,.back
 {
   position: absolute;
@@ -90,8 +104,8 @@
 }
 
 .front img {
-    filter: brightness(0.05) contrast(0.2);
-    opacity: 0.2;
+    filter: brightness(0.01) contrast(0.9);
+    opacity: 0.7;
     transform: scale(1.1);
 }
 
@@ -102,24 +116,44 @@
 
 
 .button {
-  font-weight: bold;
-  border: 3px solid red;
-  width: auto;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 12px 32px;
   margin-top: 20px;
-  padding: 10px 15px;
-  font-size: 16px;
-  background-color: blue;
-  color: white;
-  border-radius: 8px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: linear-gradient(#ff5a5a, #e73232);
+  color: #ffffff;
+
+  box-shadow:
+    0 4px 0 #b02020,
+    0 6px 12px rgba(0, 0, 0, 0.35);
+
   cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    filter 0.1s ease;
 }
 
 .button:hover {
-  background-color: green;
-  transform: scale(1.05);
+  filter: brightness(1.05);
+  transform: translateY(1px);
+  box-shadow:
+    0 3px 0 #b02020,
+    0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .button:active {
-  transform: scale(0.95);
+  transform: translateY(2px) scale(0.97);
+  box-shadow:
+    0 1px 0 #7a1414,
+    0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
+.pokemon-selection-text {
+  font-size: 30px;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
