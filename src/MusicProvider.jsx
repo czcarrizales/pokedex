@@ -9,9 +9,10 @@ import React, {
 
 import loginMusic from "./music/pokemonlab.mp3";
 import profileMusic from "./music/hearthome.mp3";
-import pokedexMusic from "./music/whitecity.mp3";
+import pokedexMusic from "./music/littleroot.mp3";
 import quizMusic from "./music/goldenrod.mp3";
 import mysteryMusic from "./music/pokemart.mp3";
+import achievementsMusic from "./music/aspertia.mp3"
 
 const TRACKS = {
   auth: loginMusic,
@@ -19,6 +20,7 @@ const TRACKS = {
   pokedex: pokedexMusic,
   quiz: quizMusic,
   mystery: mysteryMusic,
+  achievements: achievementsMusic
 };
 
 const MusicContext = createContext({

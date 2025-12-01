@@ -1,9 +1,16 @@
 import { useState, useEffect} from 'react'
+import { useMusic } from "./MusicProvider";
 import './Achievements.css';
 
 function Achievements ({userId}) {
 
    const [achievements, setAchievements] = useState([])
+
+   const { setTrack } = useMusic();
+   
+       useEffect(() => {
+           setTrack("achievements");
+       }, [setTrack]);
 
    async function grabAchievements(){
 
