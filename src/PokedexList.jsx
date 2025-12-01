@@ -48,8 +48,17 @@ function PokedexList() {
                 setPokemonDetails(detailsJson);
                 setPokemonSpecies(speciesJson);
 
+                const overrides = {
+                    "mr-mime": "mrmime",
+                    "nidoran-m": "nidoranm",
+                    "nidoran-f": "nidoranf",
+                };
+
+                const name = detailsJson.name.toLowerCase();
+                const cryName = overrides[name] ?? name;
+
                 new Audio(
-                    `https://play.pokemonshowdown.com/audio/cries/${detailsJson.name.toLowerCase()}.ogg`
+                    `https://play.pokemonshowdown.com/audio/cries/${cryName}.ogg`
                 )
                     .play()
                     .catch(() => {
