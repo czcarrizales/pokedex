@@ -13,9 +13,16 @@ export default class PokemonModel {
         return this.types?.[0] || "normal"
     }
 
+
+
     get showdownName() {
+        const SHOWDOWN_NAME_OVERRIDES = {
+            "mr-mime": "mrmime",
+            "nidoran-m": "nidoranm",
+            "nidoran-f": "nidoranf",
+        };
         const lower = this.name.toLowerCase()
-        return lower
+        return SHOWDOWN_NAME_OVERRIDES[lower] ?? lower;
     }
 
     get animatedSpriteUrl() {
