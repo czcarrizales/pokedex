@@ -49,7 +49,7 @@ function Tracker() {
                 <div className="trackerLeft">
                     <p><b>Recently Caught</b></p>
                     <button className="trackerButton" onClick={playCry}>
-                        <img className="trackerImage" src={`https://play.pokemonshowdown.com/sprites/ani/${pokemonName}.gif`}/>
+                        <img style={{ borderRadius: 15 }}className="trackerImage" src={total !== 0 ? `https://play.pokemonshowdown.com/sprites/ani/${pokemonName}.gif` : `https://media.tenor.com/ihqN6a3iiYEAAAAM/pikachu-shocked-face-stunned.gif`}/>
                     </button>
                 </div>
                 <div className="trackerRight">
